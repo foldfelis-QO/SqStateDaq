@@ -43,9 +43,11 @@ namespace SqStateDaq
                     Source = SignalDrop.SigExtAnaTrigger,
                     Edge = ActiveSignal.RisingEdge,
                     DelayCount = 0,
-                    Level = 5.0,
+                    Level = 3.0,
                 }
             };
+            waveformCtrl.Channels[0].SignalType = AiSignalType.SingleEnded;
+            waveformCtrl.Channels[0].ValueRange = ValueRange.V_Neg10To10;
             waveformCtrl.Stopped += WaveformAiCtrl_Stopped;
             Console.WriteLine("Selected {0}. {1}", waveformCtrl.SelectedDevice.DeviceNumber, waveformCtrl.SelectedDevice);
 
@@ -56,20 +58,21 @@ namespace SqStateDaq
         private void WaveformAiCtrl_Stopped(object sender, BfdAiEventArgs e)
         {
             var waveformAiCtrl = (WaveformAiCtrl)sender;
-            var chanCount = waveformAiCtrl.Conversion.ChannelCount;
-            var sectionLength = waveformAiCtrl.Record.SectionLength;
-            var bufSize = sectionLength * chanCount;
 
             var remainingCount = e.Count;
             if (e.Count <= 0) return;
 
-            // SqData = new double[bufSize];
             do
             {
+                var chanCount = waveformAiCtrl.Conversion.ChannelCount;
+                var sectionLength = waveformAiCtrl.Record.SectionLength;
+                var bufSize = sectionLength * chanCount;
                 var getDataCount = Math.Min(bufSize, remainingCount);
                 waveformAiCtrl.GetData(getDataCount, SqData, 0, out var returnedCount);
                 remainingCount -= returnedCount;
             } while (remainingCount > 0);
+
+            waveformAiCtrl.Cleanup();
         }
     }
 }
