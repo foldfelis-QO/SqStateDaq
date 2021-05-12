@@ -5,10 +5,12 @@ namespace SqStateDaq
 {
     class SqDataQueryServices: IDataQuery
     {
+        private readonly DaqCtrl _daqCtrl = new DaqCtrl();
+        private readonly SqData _sqData = new SqData {Data = new double[0]};
+
         public SqData GetSqData()
         {
-            var daqCtrl = new DaqCtrl();
-            var waveformCtrl = daqCtrl.InitWaveformAiCtrl();
+            var waveformCtrl = _daqCtrl.InitWaveformAiCtrl();
             waveformCtrl.Prepare();
             waveformCtrl.Start();
 
@@ -17,7 +19,9 @@ namespace SqStateDaq
                 Thread.Sleep(1);
             }
 
-            return new SqData {Data = daqCtrl.SqData};
+            _sqData.Data = _daqCtrl.SqData;
+
+            return _sqData;
         }
     }
 }
