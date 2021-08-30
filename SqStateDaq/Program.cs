@@ -11,7 +11,7 @@ namespace SqStateDaq
             var serviceHost = new WebServiceHost(typeof(SqDataQueryServices), baseAddress);
             serviceHost.Open();
             Console.WriteLine("DAQ is running");
-            Console.WriteLine("Enter `quit` any key to stop");
+            Console.WriteLine("Enter `quit` to stop");
             while (Console.ReadLine() != "quit") { }
             serviceHost.Close();
 
