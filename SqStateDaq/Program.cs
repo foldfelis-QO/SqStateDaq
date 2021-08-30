@@ -7,7 +7,7 @@ namespace SqStateDaq
     {
         static void Main(string[] args)
         {
-            var baseAddress = new Uri("http://127.0.0.1:7788/");
+            var baseAddress = new Uri("http://127.0.0.1:8080/");
             var serviceHost = new WebServiceHost(typeof(SqDataQueryServices), baseAddress);
             serviceHost.Open();
             Console.WriteLine("Web is running");
