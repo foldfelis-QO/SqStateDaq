@@ -8,7 +8,7 @@ namespace SqStateDaq
     interface IDataQuery
     {
         [OperationContract]
-        [WebGet(UriTemplate = "DataQuery", BodyStyle = WebMessageBodyStyle.Bare, RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
+        [WebGet(UriTemplate = "/", BodyStyle = WebMessageBodyStyle.Bare, RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
         SqData GetSqData();
     }
 
