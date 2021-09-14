@@ -6,8 +6,8 @@ namespace SqStateDaq
 {
     class DaqCtrl
     {
-        public double[] SqData = new double[4096];
-        
+        public double[] SqData = new double[8192];
+
         public static IEnumerable<DeviceTreeNode> GetSupportedDevice()
         {
             var waveformCtrl = new WaveformAiCtrl();
@@ -29,7 +29,7 @@ namespace SqStateDaq
                 Conversion =
                 {
                     ChannelStart = 0,
-                    ChannelCount = 1,
+                    ChannelCount = 2,
                     ClockRate = 16384.0,
                 },
                 Record =
