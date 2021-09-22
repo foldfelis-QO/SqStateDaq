@@ -48,6 +48,8 @@ namespace SqStateDaq
             };
             waveformCtrl.Channels[0].SignalType = AiSignalType.SingleEnded;
             waveformCtrl.Channels[0].ValueRange = ValueRange.V_Neg10To10;
+            waveformCtrl.Channels[1].SignalType = AiSignalType.SingleEnded;
+            waveformCtrl.Channels[1].ValueRange = ValueRange.V_Neg10To10;
             waveformCtrl.Stopped += WaveformAiCtrl_Stopped;
             Console.WriteLine("Selected {0}. {1}", waveformCtrl.SelectedDevice.DeviceNumber, waveformCtrl.SelectedDevice);
 
